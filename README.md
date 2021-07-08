@@ -39,8 +39,8 @@ This will preprocess all the images into `output_dir_path`.
 
 <br><br>
 
-###Sample Input and Output
+#### Sample Input and Output
 <p align="center">
   <img src="INPUT/DSC_0645.jpg" width="350" title="Input Image">
-  <img src="DSC_0645.jpg" width="350" alt="Output Image">
+  <img src="OUTPUT/DSC_0645.jpg" width="350" alt="Output Image">
 </p>
