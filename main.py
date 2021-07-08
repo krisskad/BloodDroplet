@@ -94,6 +94,12 @@ def process_image(input_dir=None, output_dir=None):
     extensions = ("*.jpg", "*.png")
     image_list = []
     count = 0
+
+    # warning
+    if input_dir == output_dir:
+        print("WARNING: Input and output directory are same, It should be different")
+        return None
+
     # check if input dir is valid or not
     if input_dir is not None:
         if os.path.isdir(input_dir):
@@ -101,10 +107,12 @@ def process_image(input_dir=None, output_dir=None):
                 image_list.extend(glob.glob(os.path.join(input_dir, extension)))
         else:
             print("Please provide valid input directory", input_dir)
+            return None
 
     if output_dir is not None:
         if not os.path.isdir(output_dir):
             print("Please provide valid output directory", output_dir)
+            return None
 
     # print(image_list)
     # Process Image
@@ -125,8 +133,8 @@ def process_image(input_dir=None, output_dir=None):
 
 
 """
-def process_image(input_dir: Any = str,
-               output_dir: Any = str)
+def process_image(input_dir: str = path,
+               output_dir: str = path)
 """
 
 process_image("INPUT", "OUTPUT")
