@@ -80,6 +80,7 @@ def preprocess(image_path):
     # cv2.imwrite(output_dir, roi)
     return roi
 
+
 def process_image(input_dir=None, output_dir=None):
     # input folder
     # output folder
@@ -97,11 +98,11 @@ def process_image(input_dir=None, output_dir=None):
             for extension in extensions:
                 image_list.extend(glob.glob(os.path.join(input_dir, extension)))
         else:
-            print("Please provide valid input directory".input_dir)
+            print("Please provide valid input directory", input_dir)
 
     if output_dir is not None:
         if not os.path.isdir(output_dir):
-            print("Please provide valid output directory".output_dir)
+            print("Please provide valid output directory", output_dir)
 
     # print(image_list)
     # Process Image
