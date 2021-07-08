@@ -2,20 +2,18 @@ import numpy as np
 import cv2
 import glob
 import os
+import sys
 
 
-def preprocess(img_file, output_dir):
-    # Mat result
-    # vector<vector<Point> >contours
-    # vector<Vec4i>hierarchy
+def preprocess(image_path):
     savedContour = -1
     maxArea = 0.0
 
     # load image
     # image = cv2.imread('circle1.png')
     # binarayImage = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    # img_file = "DSC_0780.jpg"
-    main_original = cv2.imread(img_file)
+    # image_path = "DSC_0780.jpg"
+    main_original = cv2.imread(image_path)
     # print(main_original.shape)
 
     kernel = np.ones((5, 5), np.uint8)
@@ -79,13 +77,53 @@ def preprocess(img_file, output_dir):
     roi = masked[y:y + h, x:x + w]
     # cv2.rectangle(rect_img, (left,top), (right,bottom), (255, 0, 0), 2)
 
-    cv2.imwrite(output_dir, roi)
+    # cv2.imwrite(output_dir, roi)
+    return roi
+
+def process_image(input_dir=None, output_dir=None):
+    # input folder
+    # output folder
+    # single image
+    # kernel size
+    # print(output_dir,output_dir,single_image,kernel_size)
+    # file extensions
+
+    extensions = ("*.jpg", "*.png")
+    image_list = []
+    count = 0
+    # check if input dir is valid or not
+    if input_dir is not None:
+        if os.path.isdir(input_dir):
+            for extension in extensions:
+                image_list.extend(glob.glob(os.path.join(input_dir, extension)))
+        else:
+            print("Please provide valid input directory".input_dir)
+
+    if output_dir is not None:
+        if not os.path.isdir(output_dir):
+            print("Please provide valid output directory".output_dir)
+
+    # print(image_list)
+    # Process Image
+    for image in image_list:
+        # remove watermark
+        final = preprocess(image)
+
+        # image name
+        image_name = os.path.split(image)[1]
+
+        # write image to output dir
+        cv2.imwrite(os.path.join(output_dir, image_name), final)
+
+        # progress
+        count = count + 1
+        sys.stdout.write("\r" + "Image Count:{}".format(count))
+        sys.stdout.flush()
 
 
-all_images = glob.glob("INPUT/*.jpg")
+"""
+def preprocess(input_dir: Any = str,
+               output_dir: Any = str)
+"""
 
-for image in all_images:
-    # image name
-    image_name = os.path.split(image)[1]
-    output_dir = os.path.join("OUTPUT", image_name)
-    preprocess(image, output_dir)
+process_image("INPUT", "OUTPUT")
