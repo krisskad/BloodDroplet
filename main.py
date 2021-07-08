@@ -68,7 +68,9 @@ def preprocess(image_path):
     boxes = []
     for c in contour:
         (x, y, w, h) = cv2.boundingRect(c)
-        boxes.append([x, y, w, h])
+
+        if w>100 and h>100:
+            boxes.append([x, y, w, h])
 
     boxes = np.asarray(boxes)
     x, y = np.min(boxes, axis=0)[:2]
@@ -123,7 +125,7 @@ def process_image(input_dir=None, output_dir=None):
 
 
 """
-def preprocess(input_dir: Any = str,
+def process_image(input_dir: Any = str,
                output_dir: Any = str)
 """
 
