@@ -31,9 +31,17 @@ Assuming that your INPUT images are in folders `INPUT/` and it will write all th
 #### Advance Usage
 You can simply use preprocess function in your code with two parameters example given below
 ```
-from main import process_image
+from example import process_image
 process_image("input_dir_path", "output_dir_path")
 ```
+
+#### Module
+BloodDroplet is the python module simply import it as below 
+```
+from BloodDroplet import process_image
+process_image("input_dir_path", "output_dir_path")
+```
+
 
 This will preprocess all the images into `output_dir_path`.
 
