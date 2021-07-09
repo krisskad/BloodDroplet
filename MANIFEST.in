@@ -1,1 +1,4 @@
 global-inlcude *.txt *.py
+include README.txt
+include CHANGELOG.txt
+include LICENCE.txt
