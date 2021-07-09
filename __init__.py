@@ -83,7 +83,7 @@ def preprocess(image_path):
     return roi
 
 
-def process_image(input_dir=None, output_dir=None):
+def process_image(input_dir=None, output_dir=None, single_image = None):
     # input folder
     # output folder
     # single image
@@ -114,6 +114,13 @@ def process_image(input_dir=None, output_dir=None):
             print("Please provide valid output directory", output_dir)
             return None
 
+    if single_image is not None:
+        if os.path.isfile(single_image):
+            image_list.extend([single_image])
+        else:
+            print("Please provide valid image path", single_image)
+            return None
+
     # print(image_list)
     # Process Image
     for image in image_list:
@@ -137,4 +144,4 @@ def process_image(input_dir: str = path,
                output_dir: str = path)
 """
 
-process_image("INPUT", "OUTPUT")
+# process_image("INPUT", "OUTPUT")
