@@ -73,8 +73,12 @@ def preprocess(image_path):
             boxes.append([x, y, w, h])
 
     boxes = np.asarray(boxes)
-    x, y = np.min(boxes, axis=0)[:2]
-    w, h = np.max(boxes, axis=0)[2:]
+    if len(boxes) > 1:
+        x, y = np.min(boxes, axis=0)[:2]
+        w, h = np.max(boxes, axis=0)[2:]
+    else:
+        x, y = 0, 0
+        w, h = rect_img.shape[1], rect_img.shape[0]
 
     roi = masked[y:y + h, x:x + w]
     # cv2.rectangle(rect_img, (left,top), (right,bottom), (255, 0, 0), 2)
